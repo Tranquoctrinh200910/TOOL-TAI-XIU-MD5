@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dự đoán Tài/Xỉu từ Mã MD5 - SUMCLUB</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #12121c);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #00f0ff;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      color: #FFD700;
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #FFD700;
+    }
+
+    input {
+      width: 100%;
+      padding: 18px;
+      font-size: 20px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-bottom: 20px;
+      background: #222;
+      color: #0ff;
+      text-align: center;
+      box-shadow: inset 0 0 10px #00f0ff;
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #00f0ff, #005eff);
+      color: #fff;
+      box-shadow: 0 0 15px #00f0ff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00f0ff;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dự Đoán Tài/Xỉu từ Mã MD5</h1>
+    <input type="text" id="md5Input" placeholder="🔍 Dán mã MD5 tại đây...">
+    <button onclick="predict()">🎯 Dự đoán</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function predict() {
+      const md5 = document.getElementById('md5Input').value.toLowerCase().replace(/[^a-f0-9]/g, '');
+      if (md5.length < 32) {
+        document.getElementById('result').innerHTML = "❌ Mã MD5 không hợp lệ!";
+        return;
+      }
+
+      let score = 0;
+      for (let i = 0; i < md5.length; i++) {
+        const ch = md5[i];
+        if ('02468ace'.includes(ch)) score++;
+        else score--;
+      }
+
+      const result = score > 0 ? "🎯 KẾT QUẢ: <span style='color:#FFD700'>TÀI</span>" : "🎯 KẾT QUẢ: <span style='color:#ff5050'>XỈU</span>";
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</body>
+</html>
